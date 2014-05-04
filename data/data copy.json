@@ -1,0 +1,188 @@
+{
+    "albums":
+            [
+                {
+                    "id": 1,
+                    "artist": "Air",
+                    "title": "Moon Safari",
+                    "bio": "This is a bio.",
+                    "date": "1998",
+                    "genre": "Dance",
+                    "image": "img/Air.png",
+                    "tracks": [
+                        {
+                            "name": "Le LeVoyage de Penelope",
+                            "audio": "playlist/LeVoyageDePenelope.m4a"
+                        },
+                        {
+                            "name": "La Femme de Argent",
+                            "audio": "playlist/Lafemmedargent.m4a"
+                        }
+                    ]
+                },
+                {
+                    "id": 2,
+                    "artist": "The Beatles",
+                    "title": "Love",
+                    "bio": "This is a bio.",
+                    "date": "1975",
+                    "genre": "Rock",
+                    "image": "img/Love.png",
+                    "tracks": [
+                        {
+                            "name": "Glass Onion",
+                            "audio": "playlist/GlassOnion.m4a"
+                        },
+                        {
+                            "name": "I am the Walrus",
+                            "audio": "playlist/IAmTheWalrus.m4a"
+                        },
+                        {
+                            "name": "I Want to Hold Your Hand",
+                            "audio": "playlist/IWantToHoldYourHand.m4a"
+                        },
+                        {
+                            "name": "Drive My Car",
+                            "audio": "playlist/DriveMyCar.m4a"
+                        },
+                        {
+                            "name": "Benefit of Mr. Kite/She's So Heavy",
+                            "audio": "playlist/BenefitOfMrKite_ShesSoHeavy"
+                        },
+                        {
+                            "name": "Help",
+                            "audio": "playlist/Help.m4a"
+                        },
+                        {
+                            "name": "Blackbird/Yesterday",
+                            "audio": "playlist/Blackbird_Yesterday.m4a"
+                        },
+                        {
+                            "name": "Strawberry Fields Forever",
+                            "audio": "playlist/StrawberryFieldsForever.m4a"
+                        },
+                        {
+                            "name": "Lucy in the Sky With Diamonds",
+                            "audio": "playlist/LucyInTheSkyWithDiamons.m4a"
+                        },
+                        {
+                            "name": "Octopus's Garden",
+                            "audio": "playlist/OctopusGarden.m4a"
+                        },
+                        {
+                            "name": "Here Comes the Sun",
+                            "audio": "playlist/HereComesTheSun.m4a"
+                        },
+                        {
+                            "name": "Hey Jude",
+                            "audio": "playlist/HeyJude.m4a"
+                        },
+                        {
+                            "name": "All You Need Is Love",
+                            "audio": "playlist/AllYouNeedIsLove.m4a"
+                        }
+                    ]
+                },
+                {
+                    "id": 3,
+                    "artist": "Led Zeppelin",
+                    "title": "Led Zeppelin II",
+                    "bio": "This is a bio.",
+                    "date": "1979",
+                    "genre": "Blues",
+                    "image": "img/LedZeppelin2.png",
+                    "tracks": [
+                        {
+                            "name": "Whole Lotta Love",
+                            "audio": "playlist/WholeLottaLove.mp3"
+                        },
+                        {
+                            "name": "What Is And What Should Never ",
+                            "audio": "playlist/WhatIsAndWhatShouldNever.mp3"
+                        },
+                        {
+                            "name": "The Lemon Song",
+                            "audio": "playlist/TheLemonSong.mp3"
+                        },
+                        {
+                            "name": "Thank You",
+                            "audio": "playlist/ThankYou.mp3"
+                        },
+                        {
+                            "name": "Heartbreaker",
+                            "audio": "playlist/Heartbreaker.mp3"
+                        },
+                        {
+                            "name": "Living Loving Maid",
+                            "audio": "playlist/LivingLovingMaid.mp3"
+                        },
+                        {
+                            "name": "Ramble On",
+                            "audio": "playlist/RambleOn.mp3"
+                        },
+                        {
+                            "name": "Moby Dick",
+                            "audio": "playlist/MobyDick.mp3"
+                        },
+                        {
+                            "name": "Bring It On Home",
+                            "audio": "playlist/BringItOnHome.mp3"
+                        }
+                    ]
+                },
+                {
+                    "id": 4,
+                    "artist": "Portugal The Man",
+                    "title": "The Satanic Satanist",
+                    "bio": "This is a bio.",
+                    "date": "2009",
+                    "genre": "Alternative",
+                    "image": "img/TheSantanicSantanist.png",
+                    "tracks": [
+                        {
+                            "name": "Lovers In Love",
+                            "audio": "playlist/LoversInLove.m4a"
+                        },
+                        {
+                            "name": "Work All Day",
+                            "audio": "playlist/WorkAllDay.m4a"
+                        },
+                        {
+                            "name": "The Sun",
+                            "audio": "playlist/TheSun.m4a"
+                        },
+                        {
+                            "name": "People Say",
+                            "audio": "playlist/PeopleSay.m4a"
+                        }
+
+                    ]
+                },
+                {
+                    "id": 5,
+                    "artist": "Tame Impala",
+                    "title": "Tame Impala",
+                    "bio": "This is a bio.",
+                    "date": "2010",
+                    "genre": "Rock",
+                    "image": "img/TameImpala.png",
+                    "tracks": [
+                        {
+                            "name": "Desire Be Desire Go",
+                            "audio": "playlist/DesireBeDesireGo.mp3"
+                        },
+                        {
+                            "name": "Skeleton Tiger",
+                            "audio": "playlist/SkeletonTiger.mp3"
+                        }
+
+                    ]
+                }
+
+            ],
+    "genres": ["Alternative", "Blues", "Dance", "Rock"],
+    "albumTitle": ["Led Zeppelin II", "Love", "Moon Safari", "Tame Impala", "The Satanic Satanist"],
+    "artistName": ["Air", "Led Zeppelin", "Portugal The Man", "Tame Impala", "The Beatles"]
+
+
+}

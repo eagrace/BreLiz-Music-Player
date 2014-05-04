@@ -1,0 +1,186 @@
+{
+    "albums":
+            [
+                {
+                    "id": 1,
+                    "artist": "Air",
+                    "title": "Moon Safari",
+                    "bio": "A music duo from France.",
+                    "date": "1998",
+                    "genre": "Dance",
+                    "image": "img/Air.png",
+                    "tracks": [
+                        {
+                            "name": "La LeVoyage De Penelope",
+                            "audio": "playlist/LeVoyageDePenelope.mp3"
+                        },
+                        {
+                            "name": "La Femme de Argent",
+                            "audio": "playlist/Lafemmedargent.mp3"
+                        }
+                    ]
+                },
+                {
+                    "id": 2,
+                    "artist": "The Beatles",
+                    "title": "Love",
+                    "bio": "English rock band during the 1960s. Their music ultimately led to a sociocultural revolution.",
+                    "date": "1975",
+                    "genre": "Rock",
+                    "image": "img/Love.png",
+                    "tracks": [
+                        {
+                            "name": "Glass Onion",
+                            "audio": "playlist/GlassOnion.mp3"
+                        },
+                        {
+                            "name": "I am the Walrus",
+                            "audio": "playlist/IAmTheWalrus.mp3"
+                        },                        
+                        {
+                            "name": "I Want to Hold Your Hand",
+                            "audio": "playlist/IWantToHoldYourHand.mp3"
+                        },
+                        {
+                            "name": "Drive My Car",
+                            "audio": "playlist/DriveMyCar.mp3"
+                        },
+                        {
+                            "name": "Benefit of Mr. Kite/She's So Heavy",
+                            "audio": "playlist/BenefitOfMrKite_ShesSoHeavy.mp3"
+                        },
+                        {
+                            "name": "Help",
+                            "audio": "playlist/Help.mp3"
+                        },
+                        {
+                            "name": "Blackbird/Yesterday",
+                            "audio": "playlist/Blackbird_Yesterday.mp3"
+                        },
+                        {
+                            "name": "Strawberry Fields Forever",
+                            "audio": "playlist/StrawberryFieldsForever.mp3"
+                        },
+                        {
+                            "name": "Lucy in the Sky With Diamonds",
+                            "audio": "playlist/LucyInTheSkyWithDiamons.mp3"
+                        },
+                        {
+                            "name": "Octopus's Garden",
+                            "audio": "playlist/OctopusGarden.mp3"
+                        },
+                        {
+                            "name": "Here Comes the Sun",
+                            "audio": "playlist/HereComesTheSun.mp3"
+                        },
+                        {
+                            "name": "Hey Jude",
+                            "audio": "playlist/HeyJude.mp3"
+                        },
+                        {
+                            "name": "All You Need Is Love",
+                            "audio": "playlist/AllYouNeedIsLove.mp3"
+                        }
+                    ]
+                },
+                {
+                    "id": 3,
+                    "artist": "Led Zeppelin",
+                    "title": "Led Zeppelin II",
+                    "bio": "Led Zeppelin formed in 1968. They are probably one of the most influental rock bands in history.",
+                    "date": "1979",
+                    "genre": "Blues",
+                    "image": "img/LedZeppelin2.png",
+                    "tracks": [
+                        {
+                            "name": "Whole Lotta Love",
+                            "audio": "playlist/WholeLottaLove.mp3"
+                        },
+                        {
+                            "name": "What Is And What Should Never ",
+                            "audio": "playlist/WhatIsAndWhatShouldNever.mp3"
+                        },
+                        {
+                            "name": "The Lemon Song",
+                            "audio": "playlist/TheLemonSong.mp3"
+                        },
+                        {
+                            "name": "Thank You",
+                            "audio": "playlist/ThankYou.mp3"
+                        },
+                        {
+                            "name": "Heartbreaker",
+                            "audio": "playlist/Heartbreaker.mp3"
+                        },
+                        {
+                            "name": "Living Loving Maid",
+                            "audio": "playlist/LivingLovingMaid.mp3"
+                        },
+                        {
+                            "name": "Ramble On",
+                            "audio": "playlist/RambleOn.mp3"
+                        },
+                        {
+                            "name": "Moby Dick",
+                            "audio": "playlist/MobyDick.mp3"
+                        },
+                        {
+                            "name": "Bring It On Home",
+                            "audio": "playlist/BringItOnHome.mp3"
+                        }
+                    ]
+                },
+                {
+                    "id": 4,
+                    "artist": "Portugal The Man",
+                    "title": "The Satanic Satanist",
+                    "bio": "A pyschedelic rock / pop band from Wasilla, Alaska.",
+                    "date": "2009",
+                    "genre": "Alternative",
+                    "image": "img/TheSantanicSantanist.png",
+                    "tracks": [
+                        {
+                            "name": "Lovers In Love",
+                            "audio": "playlist/LoversInLove.mp3"
+                        },
+                        {
+                            "name": "Work All Day",
+                            "audio": "playlist/WorkAllDay.mp3"
+                        },
+                        {
+                            "name": "The Sun",
+                            "audio": "playlist/TheSun.mp3"
+                        },
+                        {
+                            "name": "People Say",
+                            "audio": "playlist/PeopleSay.mp3"
+                        }
+                    ]
+                },
+                {
+                    "id": 5,
+                    "artist": "Tame Impala",
+                    "title": "Tame Impala",
+                    "bio": "Pyschedelic rock band from Austraila.",
+                    "date": "2010",
+                    "genre": "Rock",
+                    "image": "img/TameImpala.png",
+                    "tracks": [
+                        {
+                            "name": "Desire Be Desire Go",
+                            "audio": "playlist/DesireBeDesireGo.mp3"
+                        },
+                        {
+                            "name": "Skeleton Tiger",
+                            "audio": "playlist/SkeletonTiger.mp3"
+                        }
+
+                    ]
+                }
+
+            ],
+
+    "genres": ["Alternative", "Blues", "Dance", "Rock"],
+    "albumTitle": ["Led Zeppelin II", "Love", "Moon Safari", "Tame Impala", "The Satanic Satanist"],
+    "artistName": ["Air", "Led Zeppelin", "Portugal The Man", "Tame Impala", "The Beatles"]
+}
