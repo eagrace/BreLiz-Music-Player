@@ -18,7 +18,7 @@ Description: The main index for our music player
         <script type="text/javascript" src="js/underscore-min.js"></script>        
     </head>
     <body>
-        <audio preload="auto" tabindex="0" autoplay="" loop=""></audio>
+        <audio id="playlist" preload="" tabindex="" autoplay="" loop=""></audio>
 
         <div id="banner">
 
@@ -71,7 +71,7 @@ Description: The main index for our music player
         <!--image and nav bar animation-->
         <script>
 
-            function changeImage() {
+            /*function changeImage() {
                 if (document.getElementById("playImg").src == "img/pause.png") 
             {
                 document.getElementById("playImg").src = "img/play.png";
@@ -80,7 +80,7 @@ Description: The main index for our music player
             {
                  document.getElementById("playImg").src = "img/play.png";
             }
-    }       
+    }    */   
 
             $(".navBtn").hover(function() {
                 $(this).stop().animate({ fontSize : '33px' });
@@ -105,16 +105,17 @@ Description: The main index for our music player
         
             $(document).ready(function() {
                 $.getJSON(
-                    "data/data.json",
+                    "data/tracks.json",
                     function(data) {
 
-                       music = data.albums[albumIndex].tracks[trackIndex].audio;
-                       playing = music;
-                       console.log("playing");
+                      //music = data.albums[albumIndex].tracks[trackIndex].audio;
+                       //playing = music;
+                       //console.log("playing");
                         //albums = data.albums;
 
                         //set first song
-                        $("#playlist").attr("src", data.albums[albumIndex].tracks[trackIndex].audio);
+                        //$("#playlist").attr("src", data.albums[albumIndex].tracks[trackIndex].audio);
+                        $("#playlist").attr("src", data.tracks[trackIndex]);
                         console.log("song is playing");
                         
                         //audio object
@@ -124,14 +125,15 @@ Description: The main index for our music player
                         song.addEventListener("ended", function() {
 
                             //next song index
-                           // songIndex++;
-                            albumIndex++;
+                            //songIndex++;
+                            //albumIndex++;
                             trackIndex++;
 
                             //song index is less than all songs
-                            if(albumIndex < data.albums[albumIndex].length && trackIndex < data.tracks[trackIndex].audio.length ) {
+                            if(trackIndex < data.tracks.length ) {
                                 //set song
-                                $("#playlist").attr("src", data.albums[albumIndex].tracks[trackIndex].audio);
+                                //$("#playlist").attr("src", data.albums[albumIndex].tracks[trackIndex].audio);
+                                $("#playlist").attr("src", data.tracks[trackIndex]);
                                 //play song
                                 song.play();
 
@@ -139,14 +141,16 @@ Description: The main index for our music player
                                 $("artist").html(data.albums.artist);
 
                                 //display song name
-                                $("song").html(data.albums.tracks);
+                                $("song").html(data.tracks);
 
                             } else {
                                 //all songs finished playing
                             }
+    
                         });
-                        //play first sound
-                        song.play();
+                              //play first sound
+                              song.play();
+                      
                     }
                 );
 
