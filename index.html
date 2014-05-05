@@ -18,7 +18,7 @@ Description: The main index for our music player
         <script type="text/javascript" src="js/underscore-min.js"></script>        
     </head>
     <body>
-        <audio id="playlist" preload="" tabindex="" autoplay="" loop=""></audio>
+        <audio id="playlist" controls="controls"></audio>
 
         <div id="banner">
 
@@ -55,7 +55,7 @@ Description: The main index for our music player
                 </div>
                 <div class="controls">
                     <div id="play"><img id="playImg" src="img/play.png" alt="Play" style="width: 40px; height: 40px;" onclick="changeImage()"></div>
-                    <div id="stop"><img src="img/pause.png" alt="Pause" style="width: 40px; height: 40px;"></div>
+                    <div id="stop"><!--<img src="img/pause.png" alt="Pause" style="width: 40px; height: 40px;">--></div>
                     <div class="time">
                         <div id="duration"></div>
                     </div>
@@ -71,16 +71,18 @@ Description: The main index for our music player
         <!--image and nav bar animation-->
         <script>
 
-            /*function changeImage() {
-                if (document.getElementById("playImg").src == "img/pause.png") 
+        $("#play").click(function() {
+            if (!$("#playlist")[0].paused)
             {
-                document.getElementById("playImg").src = "img/play.png";
+                $("#playlist")[0].pause();           
+                $("#play").text("Play Music");
             }
-                else 
-            {
-                 document.getElementById("playImg").src = "img/play.png";
-            }
-    }    */   
+            else
+                {
+                    $("#playlist")[0].play();           
+                    $("#play").text("Stop Music");
+                }
+        });
 
             $(".navBtn").hover(function() {
                 $(this).stop().animate({ fontSize : '33px' });
