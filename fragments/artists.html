@@ -1,18 +1,18 @@
 <html>
     <head>
         <title>A Music Player</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">  
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="../style.css" />
         <link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
-        <script src="../js/jquery-2.0.3.min.js"></script>   
+        <script src="../js/jquery-2.0.3.min.js"></script>
         <script src="../js/main.js"></script>
         <script type="text/javascript" src="../js/jquery.min.js"></script>
         <script type="text/javascript" src="../js/handlebars-v1.3.0.js"></script>
-        <script type="text/javascript" src="../js/underscore-min.js"></script>    
+        <script type="text/javascript" src="../js/underscore-min.js"></script>
     </head>
     <body>
 
-        <!-- This page will display then artists for user to select -->            
+        <!-- This page will display then artists for user to select -->
         <!--This will display either Genre Type, Album Name, or Artist Name-->
         <!-- start of an experiment to slide the option to the left-->
         <div id="contentSubOne">
@@ -25,11 +25,11 @@
         <!--clear floats and whatever-->
         <div style="clear:both; width:100%" ></div>
 
-        <!--Search--> 
+        <!--Search-->
         <div id="search">
             Search for Title: <input id="txtSearch" />
             <input class="button" id="btnSearch" type="button" value="Find It!" />
-        </div>             
+        </div>
 
 
 
@@ -42,9 +42,9 @@
             <li><img src="{{this.image}}" /></li>
             <li>{{this.bio}}</li>
             </li>
-            {{/each}}	
+            {{/each}}
             </ul>
-        </script>         
+        </script>
 
         <!-- artists links IT WORKED!! -->
         <!-- this will create the links to display all artists from albumTitle array created in JSON -->
@@ -53,19 +53,19 @@
             {{#each this}}
             <li class="artistsLink">{{this}}</li>
             {{/each}}
-            </ul>            
+            </ul>
         </script>
-        <!-- this script above should display a list of artists to click.. -->        
+        <!-- this script above should display a list of artists to click.. -->
 
 
         <!-- album info template -->
         <script id="albumInfo" type="text/x-handlebars-template">
             <div>
-            <div class="albumArtist">{{artist}}</div> 
+            <div class="albumArtist">{{artist}}</div>
             <div class="albumTitle">{{title}}</div>
             <div class="albumDate">{{date}}</div>
             </div>
-        </script>      
+        </script>
 
 
         <script>
@@ -74,7 +74,7 @@
 
             $(document).ready(function() {
 
-//below starts getting information from JSON file                    
+//below starts getting information from JSON file
 
                 //cached DOM references
                 var infoDiv = $("#info");
@@ -135,7 +135,7 @@
 
                 });
             });
-        </script>          
+        </script>
 
 
 

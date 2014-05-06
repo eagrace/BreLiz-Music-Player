@@ -48,11 +48,25 @@ Description: The main index for our music player
             <!--new music player-->
             <div id="musicPlayer">
                 <div class="playerInfo">
-                    <div id="song" class="info">Song Playing</div>
-                    <div id="artist" class="info">Artist Name</div>
+                    
+                    <div id="song" class="info">
+                    <script id="song" type="text/x-handlebars-template"> 
+                    <p id="songPlaying"> Song: {{albums.tracks.name}}</p> 
+                    </script>        
+                    </div>
+                    
+                    
+                    <div id="artist" class="info">
+                    <script id="artist" type="text/x-handlebars-template">    
+                    <p id="artistPlaying"> Artist: {{albums.artist}} </p>
+                    </script>        
+                    </div>
+                    
+                    
                 </div>
                 <div class="controls">
-                    <audio id="playlist" controls="controls"></audio>
+                    <audio id="playlist" preload="auto" tabindex="0" controls="controls"></audio>
+                    
                     <!--<div id="play"><img id="playImg" src="img/play.png" alt="Play" style="width: 40px; height: 40px;" onclick="changeImage()"></div>
                     <div id="stop"><img src="img/pause.png" alt="Pause" style="width: 40px; height: 40px;"></div>-->
                     <div class="time">
@@ -61,133 +75,164 @@ Description: The main index for our music player
                 </div>
             </div><!--end music player-->           
 
+            
+           
+            <div id="tracks">
+                <h1>Songs</h1>
+                <div id="list">
+        
+                    
+                </div> <!-- end #list -->
+                
+        <script id="tracksLinks" type="text/x-handlebars-template">
 
-            <div id="data">
+            <ul class="tracks_list">
+            {{#each albums}}
+            <li class="trackLink" data-id="{{this.id}}">
+            <li class="trackLink">{{this.artist}}</li>
+            {{#each this.tracks}}
+            <li class="trackLink">{{this.name}}</li>
+            {{/each}}
+            </li>
+            {{/each}}	
+            </ul>    
+        </script> 
+            
+            </div><!-- end #tracks -->
+            
+        <div id="data">
                 <!--This will display either Genre Type, Album Name, or Artist Name-->
-            </div><!-- end #data -->
+               
+            
+         </div><!-- end #data -->
         </div><!-- end #content -->
 
         <!--js (should eventually go in separate js folder-->
         <script>
 
-        $("#play").click(function() {
-            if (!$("#playlist")[0].paused){
-                $("#playlist")[0].pause();           
-                $("#play").text("Play Music");
-            }
-            else
+            $("#play").click(function() {
+                if (!$("#playlist")[0].paused) {
+                    $("#playlist")[0].pause();
+                    $("#play").text("Play Music");
+                }
+                else
                 {
-                    $("#playlist")[0].play();           
+                    $("#playlist")[0].play();
                     $("#play").text("Stop Music");
                 }
-        });
+            });
 
             $(".navBtn").hover(function() {
-                $(this).stop().animate({ fontSize : '33px' });
-                },
-                function() {
-                $(this).stop().animate({ fontSize : '25px' });
-            });
+                $(this).stop().animate({fontSize: '33px'});
+            },
+                    function() {
+                        $(this).stop().animate({fontSize: '25px'});
+                    });
         </script>
 
 
 
         <!--getting music to play-->
         <script type="text/javascript">
-            
+
             var songIndex = 0;
             var albumIndex = 0;
             var trackIndex = 0;
-            var song; 
+            var song;
             var music;
             var playing;
             var currentSong;
-        
+
             $(document).ready(function() {
                 $.getJSON(
-                    "data/data.json",
-                    function(data) {
+                        "data/data.json",
+                        function(data) {
 
-                      //music = data.albums[albumIndex].tracks[trackIndex].audio;
-                       //playing = music;
-                       //console.log("playing");
-                        //albums = data.albums;
+                            //music = data.albums[albumIndex].tracks[trackIndex].audio;
+                            //playing = music;
+                            //console.log("playing");
+                            //albums = data.albums;
 
-                        //set first song
-                        //$("#playlist").attr("src", data.albums[albumIndex].tracks[trackIndex].audio);
-                        $("#playlist").attr("src", data.tracks[trackIndex]);
-                        console.log("song is playing");
-                        
-                        //audio object
-                        song = document.getElementById("playlist");
-                        
-                        //ended event
-                        song.addEventListener("ended", function() {
+                            //set first song
+                            $("#playlist").attr("src", data.albums[albumIndex].tracks[trackIndex].audio);
+                            //$("#playlist").attr("src", data.tracks[trackIndex]);
+                            console.log("song is playing");
 
-                            //next song index
-                            //songIndex++;
-                            //albumIndex++;
-                            trackIndex++;
+                            //audio object
+                            song = document.getElementById("playlist");
 
-                            //song index is less than all songs
-                            if(trackIndex < data.tracks.length ) {
-                                //set song
-                                //$("#playlist").attr("src", data.albums[albumIndex].tracks[trackIndex].audio);
-                                $("#playlist").attr("src", data.tracks[trackIndex]);
-                                //play song
-                                song.play();
+                            //ended event
+                            song.addEventListener("ended", function() {
 
-                                //display artist info
-                                $("artist").html(data.albums.artist);
+                                //next song index
+                                //songIndex++;
+                                //albumIndex++;
+                                trackIndex++;
 
-                                //display song name
-                                $("song").html(data.tracks);
+                              
+                                 
 
-                            } else {
-                                //all songs finished playing
-                            }
-    
-                        });
-                              //play first sound
-                              song.play();
-                      
-                    }
+                                //song index is less than all songs
+                                if (trackIndex < data.tracks.length) {
+                                    //set song
+                                    $("#playlist").attr("src", data.albums[albumIndex].tracks[trackIndex].audio);
+                                    //$("#playlist").attr("src", data.tracks[trackIndex]);
+                                    //play song
+                                    song.play();
+
+                                    //display artist info
+                                    $("artist").html(data.albums.artist);
+                                   
+                                    //display song name
+                                    $("song").html(data.tracks.name);
+
+                                } else {
+                                    //all songs finished playing
+                                }
+
+                            });
+                            //play first sound
+                            song.play();
+
+                        }
                 );
+        
+
 
                 //when play button is clicked, play audio 
-               /*$("#play").click(function(){
+               /* $("#play").click(function(){
+                 
+                 if(playing == 0){ //if nothing is playing
+                 index = 0; //restart playlist
+                 
+                 for(var i=0; i < currentSong.length; i++){
+                 console.log(playing[i]);
+                 }
+                 
+                 playing = 1; // if something is playing
+                 
+                 //display pause button
+                 $("#play").css("background-img: img/pause.png");
+                 }
+                 
+                 });
+                 
+                 //when pause button is pressed
+                 $("#stop").click(function(){//we want to pause, not stop
+                 //check if something is playing
+                 //pause the playing song
+                 
+                 //display play button
+                 $("#stop").css("background-img: img/play.png");
+                 
+                 });*/
 
-                    if(playing == 0){ //if nothing is playing
-                        index = 0; //restart playlist
-
-                        for(var i=0; i < currentSong.length; i++){
-                            console.log(playing[i]);
-                        }
-
-                        playing = 1; // if something is playing
-
-                        //display pause button
-                        $("#play").css("background-img: img/pause.png");
-                    }
-
-                    });
-
-               //when pause button is pressed
-               $("#stop").click(function(){//we want to pause, not stop
-                //check if something is playing
-                //pause the playing song
-
-                //display play button
-                $("#stop").css("background-img: img/play.png");
-
-                });*/
-
-               //duration display 
+                //duration display 
 
             });
         </script> <!--end music player script-->
 
-        
+
 
         <script id="homePage" type="text/x-handlebars-template">
             Its {{name}}! Just listening to music and stuff.
@@ -242,6 +287,22 @@ Description: The main index for our music player
         </script> 
 
 
+        <!--template of track audio files -->
+        <script id="audiosLinks" type="text/x-handlebars-template">
+
+            <ul class="audios_list">
+            {{#each albums}}
+            <li class="audiokLink" data-id="{{this.id}}">
+            <li class="audioLink" data-id="{{this.artist}}">
+            {{#each this.tracks}}
+            <li class="audioLink">{{this.audio}}</li>
+            {{/each}}
+            </li>
+            {{/each}}	
+            </ul>    
+        </script> 
+
+
         <!-- albums links IT WORKED!! -->
         <!-- this will create the links to display all albums from albumTitle array created in JSON -->
         <script id="albumsLinks" type="text/x-handlebars-template">
@@ -283,198 +344,231 @@ Description: The main index for our music player
 
         <!-- page script -->
         <script>
-var albums;
-var tracks;
+            var albums;
+            var tracks;
 
-$(document).ready(function() {
-    //this is for the nav to go to different fragments pages..
-    $("#genresBtn").click(function() {
-        $.get(
-                "fragments/index.html",
-                function(data) {
-                    $("#data").html(data);
-                    window.location.hash = "genres";
+            $(document).ready(function() {
+                //this is for the nav to go to different fragments pages..
+                $("#genresBtn").click(function() {
+                    $.get(
+                            "fragments/index.html",
+                            function(data) {
+                                $("#data").html(data);
+                                window.location.hash = "genres";
+                            });
                 });
-    });
-    //this is for the nav
-    $("#albumsBtn").click(function() {
-        $.get(
-                "fragments/albums.html",
-                function(data) {
-                    $("#data").html(data);
-                    window.location.hash = "albums";
+                //this is for the nav
+                $("#albumsBtn").click(function() {
+                    $.get(
+                            "fragments/albums.html",
+                            function(data) {
+                                $("#data").html(data);
+                                window.location.hash = "albums";
+                            });
                 });
-    });
-    //this is for the nav                
-    $("#artistsBtn").click(function() {
-        $.get(
-                "fragments/artists.html",
-                function(data) {
-                    $("#data").html(data);
-                    window.location.hash = "artists";
+                //this is for the nav                
+                $("#artistsBtn").click(function() {
+                    $.get(
+                            "fragments/artists.html",
+                            function(data) {
+                                $("#data").html(data);
+                                window.location.hash = "artists";
+                            });
                 });
-    });
 
-    //get the window's hash value
-    var hashVal = "fragments/" + window.location.hash + ".html";
-    hashVal = hashVal.replace("#", "");
-    console.log(hashVal);
+                //get the window's hash value
+                var hashVal = "fragments/" + window.location.hash + ".html";
+                hashVal = hashVal.replace("#", "");
+                console.log(hashVal);
 
-    if (window.location.hash === "") {
-        // hashVal = "fragments/index.html";
-        hashVal = "fragments/genres.html";
-    }
+                if (window.location.hash === "") {
+                    // hashVal = "fragments/index.html";
+                    hashVal = "fragments/genres.html";
+                }
 
-    $.get(
-            hashVal,
-            function(data) {
-                console.log(data);
-                $("#data").html(data);
+                $.get(
+                        hashVal,
+                        function(data) {
+                            console.log(data);
+                            $("#data").html(data);
 
-            });
+                        });
 
-    //this is for the nav, toggle class
-    //  $('.menu').hide();
-    //  $('.nav li').toggle(function() {
-    //       $(this).next('.menu').fadeIn();
-    //$(this).addClass('close');
-    //   },
-    //this is for the nav
-    //                 function() {
-    //                     $(this).next('.nav li').fadeOut();
-    //$(this).removeClass('close');
-    //                 }); // end toggle
-
+                //this is for the nav, toggle class
+                //  $('.menu').hide();
+                //  $('.nav li').toggle(function() {
+                //       $(this).next('.menu').fadeIn();
+                //$(this).addClass('close');
+                //   },
+                //this is for the nav
+                //                 function() {
+                //                     $(this).next('.nav li').fadeOut();
+                //$(this).removeClass('close');
+                //                 }); // end toggle
 
 
-    //this is to toggle subMenu2 to display the genres, albums, and artist when the main nav btns are clicked..
-    //create variable to display data (GENRE, ALBUM, ARTIST) from JSON file in the content div from the JSON file.
-    // var dataDiv = $("#genres");//put content div here where genres will display.
 
-    //create variable to display data (SONGS, OTHER DATA) from JSON file in the content div
-    //   var subDataDiv = $("#browse");
+                //this is to toggle subMenu2 to display the genres, albums, and artist when the main nav btns are clicked..
+                //create variable to display data (GENRE, ALBUM, ARTIST) from JSON file in the content div from the JSON file.
+                // var dataDiv = $("#genres");//put content div here where genres will display.
+
+                //create variable to display data (SONGS, OTHER DATA) from JSON file in the content div
+                //   var subDataDiv = $("#browse");
 
 
-    //get the data from the JSON file to display with AJAX
-    //use the variable above to put into content divs..
-    //          $.getJSON('data.json', function(data) {
-    //what'd we get?
-    //              console.log("data");
+                //get the data from the JSON file to display with AJAX
+                //use the variable above to put into content divs..
+                //          $.getJSON('data.json', function(data) {
+                //what'd we get?
+                //              console.log("data");
 
-    //              var tracks = data.albums[0].tracks;
-    //              for (var i = 0; i < tracks.length; i++) {
-    //                  dataDiv.append("<li>"
-    //                          + tracks[i]
-    //                          + "</li>"
-    //                          );
-    //              }
+                //              var tracks = data.albums[0].tracks;
+                //              for (var i = 0; i < tracks.length; i++) {
+                //                  dataDiv.append("<li>"
+                //                          + tracks[i]
+                //                          + "</li>"
+                //                          );
+                //              }
 
-    //         });
-    //manipulate how the data is then displayed below using jQuery toggle the menus once clicked..
-    //we click on a nav menu option and genres, albums and artists toggle down in content div here
-    // $('#genres').hide();
-    //$('#contentSubOne').show();
-    $('.subMenu').hide();//hides the nav sub Menus
+                //         });
+                //manipulate how the data is then displayed below using jQuery toggle the menus once clicked..
+                //we click on a nav menu option and genres, albums and artists toggle down in content div here
+                // $('#genres').hide();
+                //$('#contentSubOne').show();
+                $('.subMenu').hide();//hides the nav sub Menus
 
-    //click on navBtn and the data displays
-    $('#genresBtn').click(function() {
-        $('#contentSubOne').fadeIn('slow');//menu slides down
-        //  $('#genres').fadeIn('slow');//menu slides down
-        //$(this).toggleClass('close');
+                //click on navBtn and the data displays
+                $('#genresBtn').click(function() {
+                    $('#contentSubOne').fadeIn('slow');//menu slides down
+                    //  $('#genres').fadeIn('slow');//menu slides down
+                    //$(this).toggleClass('close');
 
-    });//end toggle?
+                });//end toggle?
 
-    //click on AlbumsBtn and the data display
-    $('#albumsBtn').click(function() {
-        $('#contentSubOne').fadeIn('slow');//menu slides down
-        //$(this).toggleClass('close');
-    });
+                //click on AlbumsBtn and the data display
+                $('#albumsBtn').click(function() {
+                    $('#contentSubOne').fadeIn('slow');//menu slides down
+                    //$(this).toggleClass('close');
+                });
 
-    //click on artistBtn and the data display
-    $('#artistBtn').click(function() {
-        $('#contentSubOne').fadeIn('slow');//menu slides down
-        // $(this).toggleClass('close');
-    });
-    //  $('#nav .nav .navBtn').toggle(function()
-    // {
-    //      $(this).next('#contentSubOne #genres').fadeIn();
-    //  },
-    //        function()
-    //        {
-    //           $(this).next('#contentSubOne #genres').fadeOut();
-    //        });
+                //click on artistBtn and the data display
+                $('#artistBtn').click(function() {
+                    $('#contentSubOne').fadeIn('slow');//menu slides down
+                    // $(this).toggleClass('close');
+                });
+                //  $('#nav .nav .navBtn').toggle(function()
+                // {
+                //      $(this).next('#contentSubOne #genres').fadeIn();
+                //  },
+                //        function()
+                //        {
+                //           $(this).next('#contentSubOne #genres').fadeOut();
+                //        });
 //below starts getting information from JSON file                    
 
-    //cached DOM references
-    var infoDiv = $("#info");//div for info - search results
-    var browseDiv = $("#browse");//results when you click
-    var genreDiv = $("#genres");//genre links
-    var albumsDiv = $("#albums");//albums links
-    var artistDiv = $("#artists");//artists links
+                //cached DOM references
+                var infoDiv = $("#info");//div for info - search results
+                var browseDiv = $("#browse");//results when you click
+                var genreDiv = $("#genres");//genre links
+                var albumsDiv = $("#albums");//albums links
+                var artistDiv = $("#artists");//artists links
+                var songDiv = $("#list");//tracks.audio will appear when click on tracks.name
 
 
-    //templates
-    var hompageTemplate = Handlebars.compile($("#homePage").html());//home page template - has to be there?
-    var albumLinkTemplate = Handlebars.compile($("#albumHomeLinks").html());//displays album details in browse div and used in search
-    var tracksLinkTemplate = Handlebars.compile($("#tracksLinks").html());//tracks displayed in browse div
-    var albumInfoTemplate = Handlebars.compile($("#albumInfo").html());//for search results?
-    //template for genre LINKS created from array genres in json
-    var genreLinkTemplate = Handlebars.compile($("#genreLinks").html());//genre links
-    var artistDisplayTemplate = Handlebars.compile($("#artistDisplay").html());//artist info in browse div
-    var albumsLinkTemplate = Handlebars.compile($("#albumsLinks").html());//albums links
-    var artistLinkTemplate = Handlebars.compile($("#artistLinks").html());
+                //templates
+                var hompageTemplate = Handlebars.compile($("#homePage").html());//home page template - has to be there?
+                var albumLinkTemplate = Handlebars.compile($("#albumHomeLinks").html());//displays album details in browse div and used in search
+                var tracksLinkTemplate = Handlebars.compile($("#tracksLinks").html());//tracks displayed in browse div
+                var albumInfoTemplate = Handlebars.compile($("#albumInfo").html());//for search results?
+                //template for genre LINKS created from array genres in json
+                var genreLinkTemplate = Handlebars.compile($("#genreLinks").html());//genre links
+                var artistDisplayTemplate = Handlebars.compile($("#artistDisplay").html());//artist info in browse div
+                var albumsLinkTemplate = Handlebars.compile($("#albumsLinks").html());//albums links
+                var artistLinkTemplate = Handlebars.compile($("#artistLinks").html());
+               // var audiosLinkTemplate = Handlesbars.compile($("#audiosLinks").html());//tracks.audio
+              // var tracksTemplate = Handlebars.compile($("#trackHomeLinks").html());//homepage track links
+               
+                $.getJSON('data/data.json', function(data) {
+                    albums = data.albums;
+                    console.log(albums);
+                    //tracks = data.albums.tracks.audio;
+                    //console.log(tracks);
 
-
-    $.getJSON('data/data.json', function(data) {
-        albums = data.albums;
+                   // $("#content").append(albumLinkTemplate(data));
+                   // $("#list").append(tracksLinkTemplate(data));
+                    genreDiv.html(genreLinkTemplate(data.genres));//genre links
+                    albumsDiv.html(albumLinkTemplate(data.albums));//albums links
+                    artistDiv.html(artistLinkTemplate(data.artist));//artist links
+                    songDiv.html(tracksLinkTemplate(data));  
+                    
+                });
+                 
         
-        $("#content").append(albumLinkTemplate(data));
-        genreDiv.html(genreLinkTemplate(data.genres));//genre links
-        albumsDiv.html(albumLinkTemplate(data.albums));//albums links
-        artistDiv.html(artistLinkTemplate(data.artist));//artist links
-    });
+                       //click on a track name to get tracks.audio and put in #song div to play
+                $("#list").on("click", ".trackLink", function() {
+
+		var albumInfo = _.findWhere(albums, {id: $(this).data('id')});
+                var trackInfo = _.findWhere(albumInfo.tracks, {name: $(this).html()});
+                console.log(trackInfo);
+                
+                    //audio object
+                    song = document.getElementById("playlist");  
+                    console.log(trackInfo.audio);
+                    //$("#playlist").attr("src", data.albums[albumIndex].tracks[trackIndex].audio);
+                     $("#playlist").attr("src", trackInfo.audio);
+                    song.play();    
+                   
+            
+         });        
 
 
-    //Run this function whenever a element with class 'albumLink' is clicked if its in the content div, works for any now or in the future
-    //$("#albums").on("click", ".albumLink", function() {
-    //  var albumInfo = _.findWhere(albums, {id: $(this).data('id')})
-    //albumsinfoDiv.html(albumInfoTemplate(albumInfo));
-    //console.log(albums[$(this).data('id')]);
+                //Run this function whenever a element with class 'albumLink' is clicked if its in the content div, works for any now or in the future
+                //$("#albums").on("click", ".albumLink", function() {
+                //  var albumInfo = _.findWhere(albums, {id: $(this).data('id')})
+                //albumsinfoDiv.html(albumInfoTemplate(albumInfo));
+                //console.log(albums[$(this).data('id')]);
 
 
-    //get the data
-    //var templateData = albums[$(this).data('id')];
-    //generate html
-    //var toAdd = albumInfoTemplate(templateData);
-    //show in infor div
-    //infoDiv.html(toAdd);
+                //get the data
+                //var templateData = albums[$(this).data('id')];
+                //generate html
+                //var toAdd = albumInfoTemplate(templateData);
+                //show in infor div
+                //infoDiv.html(toAdd);
 
-    //infoDiv.html(bookInfoTemplate(books[$(this).data('id')]));
-    //})
+                //infoDiv.html(bookInfoTemplate(books[$(this).data('id')]));
+                //})
+                
+                
+               
+                
+                
+                
+                
 
 
-    $("#btnSearch").click(function() {
-        //get the search term
-        var searchTerm = $("#txtSearch").val();
-        //object to store any results
-        var results = {
-            albums: []
-        };
+                $("#btnSearch").click(function() {
+                    //get the search term
+                    var searchTerm = $("#txtSearch").val();
+                    //object to store any results
+                    var results = {
+                        albums: []
+                    };
 
-        //loop through all of our albums
-        results.albums = _.filter(albums, function(item) {
-            //return (item.title.indexOf(searchTerm) != -1);
-            var titleSplit = item.title.split(" ");
-            return _.find(titleSplit, function(titleWord) {
-                return titleWord.toUpperCase() == searchTerm.toUpperCase();
+                    //loop through all of our albums
+                    results.albums = _.filter(albums, function(item) {
+                        //return (item.title.indexOf(searchTerm) != -1);
+                        var titleSplit = item.title.split(" ");
+                        return _.find(titleSplit, function(titleWord) {
+                            return titleWord.toUpperCase() == searchTerm.toUpperCase();
+                        });
+                    });
+
+
+                    browseDiv.html(albumLinkTemplate(results));
+
+                });
             });
-        });
-
-
-        browseDiv.html(albumLinkTemplate(results));
-
-    });
-});
         </script>        
     </body>
 </html>

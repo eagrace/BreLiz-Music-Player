@@ -17,7 +17,9 @@
         <!-- start of an experiment to slide the option to the left-->
         <div id="contentSubOne">
             <div id="genres"></div>
-            <div id="browse"></div> <!-- this div will display to the right with more info -->
+            <div id="browse" class="list">
+               
+            </div> <!-- this div will display to the right with more info -->
         </div>
 
         <div id="info"></div>
@@ -32,7 +34,7 @@
         </div>  
 
 
-        <!--template to display album title, artist name, and tracks -->
+        <!--template to display album tracks when you click on a genre -->
         <script id="tracksLinks" type="text/x-handlebars-template">
 
             <ul class="tracks_list">
@@ -40,12 +42,27 @@
             <li class="trackLink" data-id="{{this.id}}">
             <li class="trackLink" data-id="{{this.artist}}">
             {{#each this.tracks}}
-            <li class="trackLink">{{this.name}}</li>
+            <li class="trackLink" id="track">{{this.name}}</li>
             {{/each}}
             </li>
             {{/each}}	
             </ul>    
         </script> 
+
+        <!--template of track audio files -->
+        <script id="audiosLinks" type="text/x-handlebars-template">
+
+            <ul class="audios_list">
+            {{#each albums}}
+            <li class="audiokLink" data-id="{{this.id}}">
+            <li class="audioLink" data-id="{{this.artist}}">
+            {{#each this.tracks}}
+            <li class="audioLink">{{this.audio}}</li>
+            {{/each}}
+            </li>
+            {{/each}}	
+            </ul>    
+        </script>         
 
 
         <!-- genre links -->
@@ -58,76 +75,99 @@
         </script>        
 
         <script>
-var albums;
-
-$(document).ready(function() {
+        var albums;
+        
+            var songIndex = 0;
+            var albumIndex = 0;
+            var trackIndex = 0;
+            var song;
+            var music;
+            var playing;
+            var currentSong;
+        $(document).ready(function() {
 
 //below starts getting information from JSON file
 
-    //cached DOM references
-    var infoDiv = $("#info");
-    var browseDiv = $("#browse");
-    var genreDiv = $("#genres");
+//cached DOM references
+        var infoDiv = $("#info");
+        var browseDiv = $("#browse, .list");
+        var genreDiv = $("#genres");
+        var songDiv = $("#song"); //tracks.audio will appear when click on tracks.name
 
 
-    //templates
-    // var hompageTemplate = Handlebars.compile($("#homePage").html());
-    var tracksLinkTemplate = Handlebars.compile($("#tracksLinks").html());
-    var genreLinkTemplate = Handlebars.compile($("#genreLinks").html());
+        //templates
+        //var albumLinkTemplate = Handlebars.compile($("#albumHomeLinks").html());//for search results
+        // var hompageTemplate = Handlebars.compile($("#homePage").html());
+        var tracksLinkTemplate = Handlebars.compile($("#tracksLinks").html());
+        var genreLinkTemplate = Handlebars.compile($("#genreLinks").html());
+       // var audiosLinkTemplate = Handlesbars.compile($("#audiosLinks").html());
 
 
 
-    $.getJSON('data/data.json', function(data) {
+        $.getJSON('data/data.json', function(data) {
         albums = data.albums;
-
+        console.log(albums);
         //template of genreLinks displayed..
         genreDiv.html(genreLinkTemplate(data.genres));
 
-    });
-
-
-
-    $("#genres").on("click", ".genreLink", function() {
-        var genreToFind = $(this).html();
-        var results = {};
-
-        results.albums = _.where(albums, {genre: genreToFind});
-
-        browseDiv.html(tracksLinkTemplate(results));
-    });
-
-    $("#btnSearch").click(function() {
-        //get the search term
-        var searchTerm = $("#txtSearch").val();
-        //object to store any results
-        var results = {
-            albums: []
-        };
-
-        //loop through all of our albums
-        results.albums = _.filter(albums, function(item) {
-            //return (item.title.indexOf(searchTerm) != -1);
-            var titleSplit = item.title.split(" ");
-            return _.find(titleSplit, function(titleWord) {
-                return titleWord.toUpperCase() == searchTerm.toUpperCase();
-            });
+        
         });
-        /*for(var i = 0; i < books.length; i++) {
-         //split the book's name into individual words
-         var titleSplit = books[i].title.split(" ");
-         //loop through those words
-         for(var y = 0; y < titleSplit.length; y++) {
-         if(titleSplit[y].toUpperCase() == searchTerm.toUpperCase()) {
-         results.books.push(books[i]);
-         break;
-         }
-         }
-         }*/
+                //click on genre to display tracks.name from JSON
+                $("#genres").on("click", ".genreLink", function() {
+                var genreToFind = $(this).html();
+                var results = {};
+                results.albums = _.where(albums, {genre: genreToFind});
+                browseDiv.html(tracksLinkTemplate(results));
+        });
+        
+                      //click on a track name to get tracks.audio and put in #song div to play
+                $("#browse").on("click", ".trackLink", function() {
+                    
+                   // var albumInfo = _.findWhere(albums, {id: $(this).data('id')});          
+                   // var trackInfo = _.findWhere(albumInfo.tracks, {name: $(this).html()});         
+                   // console.log(trackInfo);
+      
+                    //audio object
+                    //song = document.getElementById("playlist");  
+                    //console.log(tracksInfo.audio);
+                    // $("#playlist").attr("src", data.albums[albumIndex].tracks[trackIndex].audio);
+                   //  song.play();    
+                   // }
+            
+         });           
+  
+              
+                $("#btnSearch").click(function() {
+               //get the search term
+                var searchTerm = $("#txtSearch").val();
+                //object to store any results
+                var results = {
+                albums: []
+                };
+                //loop through all of our albums
+                results.albums = _.filter(albums, function(item) {
+                //return (item.title.indexOf(searchTerm) != -1);
+                var titleSplit = item.title.split(" ");
+                        return _.find(titleSplit, function(titleWord) {
+                        return titleWord.toUpperCase() == searchTerm.toUpperCase();
+                        });
+                });
+                /*for(var i = 0; i < books.length; i++) {
+                 //split the book's name into individual words
+                 var titleSplit = books[i].title.split(" ");
+                 //loop through those words
+                 for(var y = 0; y < titleSplit.length; y++) {
+                 if(titleSplit[y].toUpperCase() == searchTerm.toUpperCase()) {
+                 results.books.push(books[i]);
+                 break;
+                 }
+                 }
+                 }*/
 
-        browseDiv.html(albumLinkTemplate(results));//search results
+                browseDiv.html(albumLinkTemplate(results)); //search results
 
-    });
-});
+        });
+                });
         </script>
 
 
