@@ -53,13 +53,15 @@ Description: The main index for our music player
                     <script id="song" type="text/x-handlebars-template"> 
                     <p id="songPlaying"> Song: {{albums.tracks.name}}</p> 
                     </script>        
+                    La LeVoyage De Penelope
                     </div>
                     
                     
                     <div id="artist" class="info">
                     <script id="artist" type="text/x-handlebars-template">    
                     <p id="artistPlaying"> Artist: {{albums.artist}} </p>
-                    </script>        
+                    </script>    
+                    Air    
                     </div>
                     
                     
@@ -73,15 +75,16 @@ Description: The main index for our music player
                         <!--<div id="duration"></div>-->
                     </div>
                 </div>
-            </div><!--end music player-->           
+            </div><!--end music player-->  
 
+        <div id="data">
+                <!--This will display either Genre Type, Album Name, or Artist Name-->
+         </div><!-- end #data -->
             
            
             <div id="tracks">
-                <h1>Songs</h1>
+                <h2>Songs</h2>
                 <div id="list">
-        
-                    
                 </div> <!-- end #list -->
                 
         <script id="tracksLinks" type="text/x-handlebars-template">
@@ -97,14 +100,8 @@ Description: The main index for our music player
             {{/each}}	
             </ul>    
         </script> 
-            
             </div><!-- end #tracks -->
-            
-        <div id="data">
-                <!--This will display either Genre Type, Album Name, or Artist Name-->
-               
-            
-         </div><!-- end #data -->
+
         </div><!-- end #content -->
 
         <!--js (should eventually go in separate js folder-->
@@ -147,11 +144,6 @@ Description: The main index for our music player
                 $.getJSON(
                         "data/data.json",
                         function(data) {
-
-                            //music = data.albums[albumIndex].tracks[trackIndex].audio;
-                            //playing = music;
-                            //console.log("playing");
-                            //albums = data.albums;
 
                             //set first song
                             $("#playlist").attr("src", data.albums[albumIndex].tracks[trackIndex].audio);
@@ -196,38 +188,6 @@ Description: The main index for our music player
 
                         }
                 );
-        
-
-
-                //when play button is clicked, play audio 
-               /* $("#play").click(function(){
-                 
-                 if(playing == 0){ //if nothing is playing
-                 index = 0; //restart playlist
-                 
-                 for(var i=0; i < currentSong.length; i++){
-                 console.log(playing[i]);
-                 }
-                 
-                 playing = 1; // if something is playing
-                 
-                 //display pause button
-                 $("#play").css("background-img: img/pause.png");
-                 }
-                 
-                 });
-                 
-                 //when pause button is pressed
-                 $("#stop").click(function(){//we want to pause, not stop
-                 //check if something is playing
-                 //pause the playing song
-                 
-                 //display play button
-                 $("#stop").css("background-img: img/play.png");
-                 
-                 });*/
-
-                //duration display 
 
             });
         </script> <!--end music player script-->
