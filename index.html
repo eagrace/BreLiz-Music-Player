@@ -88,10 +88,11 @@ Description: The main index for our music player
 
             <ul class="tracks_list">
             {{#each albums}}
-            <li class="trackLink" data-id="{{this.id}}">
-            <li class="trackLink">{{this.artist}}</li>
+            <li class="albumLink" data-id="{{this.id}}">
+            <li class="artistLink">{{this.artist}}</li>
             {{#each this.tracks}}
-            <li class="trackLink">{{this.name}}</li>
+            <li class="trackLink" data-id="{{../id}}">{{this.name}}</li>
+            <li class="trackLink" data-id="{{../id}}">{{this.audio}}</li>
             {{/each}}
             </li>
             {{/each}}	
@@ -436,7 +437,7 @@ Description: The main index for our music player
                 // $('#genres').hide();
                 //$('#contentSubOne').show();
                 $('.subMenu').hide();//hides the nav sub Menus
-
+                
                 //click on navBtn and the data displays
                 $('#genresBtn').click(function() {
                     $('#contentSubOne').fadeIn('slow');//menu slides down
@@ -473,7 +474,8 @@ Description: The main index for our music player
                 var albumsDiv = $("#albums");//albums links
                 var artistDiv = $("#artists");//artists links
                 var songDiv = $("#list");//tracks.audio will appear when click on tracks.name
-
+                var songPlayingDiv = $("#song");//list song playing
+                var srtistPlayingDiv = $("#artist");//list artist playing
 
                 //templates
                 var hompageTemplate = Handlebars.compile($("#homePage").html());//home page template - has to be there?
@@ -502,20 +504,36 @@ Description: The main index for our music player
                     songDiv.html(tracksLinkTemplate(data));  
                     
                 });
-                 
+                
+                
         
                        //click on a track name to get tracks.audio and put in #song div to play
-                $("#list").on("click", ".trackLink", function() {
-
-		var albumInfo = _.findWhere(albums, {id: $(this).data('id')});
-                var trackInfo = _.findWhere(albumInfo.tracks, {name: $(this).html()});
-                console.log(trackInfo);
+                $("#tracks").on("click", ".trackLink", function() {
+                console.log("Click");
                 
+		//var albumInfo = _.findWhere(albums, {id: $(this).data('id')});
+                //console.log(albumInfo);        
+                //var trackInfo = _.findWhere(albumInfo.tracks, {name: $(this).html()});
+                //var playTrack = (albums, {id: $(this).html()}); gets right id
+               // var playTrack = ({id: $(this).html()});    this worked...
+                var getAlbumId  = _.findWhere(albums, {id: $(this).data('id')});
+                console.log(getAlbumId);
+                //var playing = (playTrack.audio, $(this).html());
+                var playing = _.findWhere(getAlbumId.tracks, {name: $(this).html()});
+                console.log(playing);
+                
+                
+                //var results = {};
+                
+               // results.albums = _.where(albums, {title:playTrack});
+               // console.log(results.albums);
+                
+                //songPlayingDiv.html(results);
                     //audio object
                     song = document.getElementById("playlist");  
-                    console.log(trackInfo.audio);
+                    //console.log(trackInfo.audio);
                     //$("#playlist").attr("src", data.albums[albumIndex].tracks[trackIndex].audio);
-                     $("#playlist").attr("src", trackInfo.audio);
+                    $("#playlist").attr("src", playing.audio);
                     song.play();    
                    
             
