@@ -92,7 +92,6 @@ Description: The main index for our music player
             <li class="artistLink">{{this.artist}}</li>
             {{#each this.tracks}}
             <li class="trackLink" data-id="{{../id}}">{{this.name}}</li>
-            <li class="trackLink" data-id="{{../id}}">{{this.audio}}</li>
             {{/each}}
             </li>
             {{/each}}	
@@ -475,7 +474,7 @@ Description: The main index for our music player
                 var artistDiv = $("#artists");//artists links
                 var songDiv = $("#list");//tracks.audio will appear when click on tracks.name
                 var songPlayingDiv = $("#song");//list song playing
-                var srtistPlayingDiv = $("#artist");//list artist playing
+                var artistPlayingDiv = $("#artist");//list artist playing
 
                 //templates
                 var hompageTemplate = Handlebars.compile($("#homePage").html());//home page template - has to be there?
@@ -536,6 +535,10 @@ Description: The main index for our music player
                     $("#playlist").attr("src", playing.audio);
                     song.play();    
                    
+                   songPlayingDiv.html(playing.name);
+                   console.log(playing.name);
+                   artistPlayingDiv.html(getAlbumId.artist);
+                   console.log(getAlbumId.artist);
             
          });        
 
